@@ -74,22 +74,22 @@ public class RoundServiceImpl implements RoundService {
         Game game = gameRepository.findById(gameId)
                 .orElseThrow(() -> new RuntimeException("Jogo não encontrado com o ID: " + gameId));
     
-        // Round currentRound = game.getCurrentRound();
-        // if (currentRound == null) {
-        //     throw new RuntimeException("O jogo não possui uma rodada atual.");
-        // }
+        Round currentRound = game.getCurrentRound();
+        if (currentRound == null) {
+            throw new RuntimeException("O jogo não possui uma rodada atual.");
+        }
     
-        // boolean correctAnswer = currentRound.getMovies().stream()
-        //         .anyMatch(movie -> movie.getId().equals(chosenMovieId));
+        boolean correctAnswer = currentRound.getMovies().stream()
+                .anyMatch(movie -> movie.getId().equals(chosenMovieId));
     
-        // if (correctAnswer) {
-        //     gameService.incrementScore(gameId);
-        // } else {
-        //     gameService.incrementError(gameId);
-        //     if (game.getNumberOfErrors() == 4) {
-        //         gameService.finishGame(gameId);
-        //     }
-        // }
+        if (correctAnswer) {
+            gameService.incrementScore(gameId);
+        } else {
+            gameService.incrementError(gameId);
+            if (game.getNumberOfErrors() == 4) {
+                gameService.finishGame(gameId);
+            }
+        }
     }
 
 }
