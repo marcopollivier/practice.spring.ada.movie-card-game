@@ -1,7 +1,5 @@
 package com.github.marcopollivier.ada.moviecardgame.domain;
 
-import java.util.UUID;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,14 +17,7 @@ public class User {
     public User() {
     }
 
-    public User(String id, String userName, String password) {
-        this.id = id;
-        this.userName = userName;
-        this.password = password;
-    }
-
     public User(String userName, String password) {
-        this.id = UUID.randomUUID().toString();
         this.userName = userName;
         this.password = password;
     }
