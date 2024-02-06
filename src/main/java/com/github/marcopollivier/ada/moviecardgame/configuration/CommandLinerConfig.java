@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.github.marcopollivier.ada.moviecardgame.application.service.GameService;
 import com.github.marcopollivier.ada.moviecardgame.application.service.MovieService;
 import com.github.marcopollivier.ada.moviecardgame.domain.Movie;
 
@@ -15,7 +16,7 @@ public class CommandLinerConfig {
     private static final Logger log = LoggerFactory.getLogger(CommandLinerConfig.class);
     
 	@Bean
-	public CommandLineRunner demo(MovieService movieService) {
+	public CommandLineRunner demo(MovieService movieService, GameService gameService) {
 		return (args) -> {
 			movieService.save(new Movie("Anatomia de uma Queda", "tt17009710")); //7.8
 			movieService.save(new Movie("Assassinos da Lua das Flores", "tt5537002")); //7.7
@@ -34,6 +35,8 @@ public class CommandLinerConfig {
 				log.info(movie.toString());
 			});
 			log.info("--------------------------------");
+
+
 
 		};
 	}

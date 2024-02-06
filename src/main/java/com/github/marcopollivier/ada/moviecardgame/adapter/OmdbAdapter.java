@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.marcopollivier.ada.moviecardgame.application.logic.TypeConversorLogic;
 import com.github.marcopollivier.ada.moviecardgame.configuration.EnvConfig;
 import com.github.marcopollivier.ada.moviecardgame.domain.OmdbMovie;
 
@@ -56,7 +55,7 @@ private static final Logger log = LoggerFactory.getLogger(OmdbAdapter.class);
         try {
             JsonNode jsonNode = objectMapper.readTree(jsonResponse);
             var stringVotes = jsonNode.get("imdbVotes").asText();
-            imdbVotes = TypeConversorLogic.usIntegerFormatToInteger(stringVotes);
+            imdbVotes = Integer.parseInt(stringVotes.replace(",", ""));
             imdbRating = jsonNode.get("imdbRating").asDouble();
             imdbID = jsonNode.get("imdbID").asText();
         } catch (IOException e) {
